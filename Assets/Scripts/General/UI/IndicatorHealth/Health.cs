@@ -8,30 +8,24 @@ public class Health : MonoBehaviour
     private Slider _helthPoints;
 
     private float _healthValue = 10;
-    private float _tergetHelath;
+    private float _maxHelath = 100f;
+    private float _minHelath = 0f;
 
-    public UnityAction<float> ChangeValue;
+    public UnityAction<float> ChangedValue;
 
     private void Start()
     {
         _helthPoints = GetComponent<Slider>();
-        _tergetHelath = _helthPoints.value;
     }
 
     public void Heal()
     {
-        float sum = _helthPoints.value + _healthValue;
-        _tergetHelath = sum <= 100 ? sum : 0f;
-
-        ChangeValue?.Invoke(_tergetHelath);
+        ChangedValue?.Invoke(Mathf.Clamp(_helthPoints.value + _healthValue, _minHelath, _maxHelath));
     }
 
     public void Damage()
     {
-        float subtraction = _helthPoints.value - _healthValue;
-        _tergetHelath = subtraction >= 0 ? subtraction : 0f;
-
-        ChangeValue?.Invoke(_tergetHelath);
+        ChangedValue?.Invoke(Mathf.Clamp(_helthPoints.value - _healthValue, _minHelath, _maxHelath));
     }
 
     

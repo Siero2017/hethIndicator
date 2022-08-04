@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Slider))]
+[RequireComponent(typeof(Health))]
 public class HelthView : MonoBehaviour
 {
     private Coroutine _proccesChangeHelth;
@@ -15,7 +16,7 @@ public class HelthView : MonoBehaviour
     {
         _healthPoints = GetComponent<Slider>();
         _healthCheck = GetComponent<Health>();
-        _healthCheck.ChangeValue += CorutineController;
+        _healthCheck.ChangedValue += CorutineController;
     }
 
     public void CorutineController(float targetHealth)
