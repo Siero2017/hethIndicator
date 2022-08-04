@@ -60,7 +60,7 @@
     <Compile Include="Assets\Scripts\General\UI\universal board\DropContainer.cs" />
     <Compile Include="Assets\Scripts\General\UI\ColorChanger.cs" />
     <Compile Include="Assets\Scripts\General\UI\universal board\Extensions\EventSystemExtensions.cs" />
-    <Compile Include="Assets\Scripts\General\UI\IndicatorHealth\HealthController.cs" />
+    <Compile Include="Assets\Scripts\General\UI\IndicatorHealth\Health.cs" />
     <Compile Include="Assets\Scripts\General\dotween\TextChanger.cs" />
     <Compile Include="Assets\Scripts\General\textScripts\Toggle.cs" />
     <Compile Include="Assets\Scripts\General\UI\universal board\Board.cs" />

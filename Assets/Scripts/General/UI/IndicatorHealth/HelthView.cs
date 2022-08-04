@@ -6,17 +6,20 @@ using UnityEngine.UI;
 public class HelthView : MonoBehaviour
 {
     private Coroutine _proccesChangeHelth;
-    private Slider _helthPoints;
+    private Slider _healthPoints;
+    private Health _healthCheck;
 
     private const int Factor = 8;
 
     private void Start()
     {
-        _helthPoints = GetComponent<Slider>();
+        _healthPoints = GetComponent<Slider>();
+        _healthCheck = GetComponent<Health>();
+        _healthCheck.ChangeValue += CorutineController;
     }
 
     public void CorutineController(float targetHealth)
-    {        
+    {
         if (_proccesChangeHelth != null)
         {
             StopCoroutine(_proccesChangeHelth);
@@ -26,9 +29,9 @@ public class HelthView : MonoBehaviour
 
     private IEnumerator ChangeHelth(float targetHealth)
     {
-        while (_helthPoints.value != targetHealth)
+        while (_healthPoints.value != targetHealth)
         {
-            _helthPoints.value = Mathf.MoveTowards(_helthPoints.value, targetHealth, Time.deltaTime * Factor);
+            _healthPoints.value = Mathf.MoveTowards(_healthPoints.value, targetHealth, Time.deltaTime * Factor);
             yield return null;
         }
     }
