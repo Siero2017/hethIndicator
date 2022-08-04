@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,16 +5,15 @@ using UnityEngine.UI;
 public class HealthController : MonoBehaviour
 {
     private Slider _helthPoints;
-
-    private Coroutine _proccesChangeHelth;
+    private HelthView _helthView;
 
     private float _healthValue = 10;
     private float _tergetHelath;
-    private const int Factor = 8;
 
     private void Start()
     {
         _helthPoints = GetComponent<Slider>();
+        _helthView = GetComponent<HelthView>();
         _tergetHelath = _helthPoints.value;
     }
 
@@ -23,31 +21,15 @@ public class HealthController : MonoBehaviour
     {
         _tergetHelath = _helthPoints.value + _healthValue;
 
-        CorutineController();
+        _helthView.CorutineController(_tergetHelath);
     }
 
     public void HitPlayer()
     {
         _tergetHelath = _helthPoints.value - _healthValue;
 
-        CorutineController();
+        _helthView.CorutineController(_tergetHelath);
     }
 
-    private void CorutineController()
-    {
-        if (_proccesChangeHelth != null)
-        {
-            StopCoroutine(_proccesChangeHelth);
-        }
-        _proccesChangeHelth = StartCoroutine(ChangeHelth());
-    }
-
-    private IEnumerator ChangeHelth()
-    {
-        while(_helthPoints.value != _tergetHelath)
-        {
-            _helthPoints.value = Mathf.MoveTowards(_helthPoints.value, _tergetHelath, Time.deltaTime * Factor);
-            yield return null;
-        }        
-    }
+    
 }
