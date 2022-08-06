@@ -5,8 +5,10 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Slider))]
 public class Health : MonoBehaviour
 {
-    private Slider _helthPoints;
+    private Slider _healthPoints;
 
+
+    private float _currentHealth;
     private float _healthValue = 10;
     private float _maxHelath = 100f;
     private float _minHelath = 0f;
@@ -15,17 +17,20 @@ public class Health : MonoBehaviour
 
     private void Start()
     {
-        _helthPoints = GetComponent<Slider>();
+        _healthPoints = GetComponent<Slider>();
+        _currentHealth = _healthPoints.value;
     }
 
     public void Heal()
     {
-        ChangedValue?.Invoke(Mathf.Clamp(_helthPoints.value + _healthValue, _minHelath, _maxHelath));
+        _currentHealth = Mathf.Clamp(_healthPoints.value + _healthValue, _minHelath, _maxHelath);
+        ChangedValue?.Invoke(_currentHealth);
     }
 
     public void Damage()
     {
-        ChangedValue?.Invoke(Mathf.Clamp(_helthPoints.value - _healthValue, _minHelath, _maxHelath));
+        _currentHealth = Mathf.Clamp(_healthPoints.value - _healthValue, _minHelath, _maxHelath);
+        ChangedValue?.Invoke(_currentHealth);
     }
 
     
